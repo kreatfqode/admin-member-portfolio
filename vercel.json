@@ -1,0 +1,24 @@
+{
+  "routes": [
+    {
+      "src": "^/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "^/logo.png",
+      "dest": "/logo.png"
+    },
+    {
+      "src": "^/loader.css",
+      "dest": "/loader.css"
+    },
+    {
+      "src": "^/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
