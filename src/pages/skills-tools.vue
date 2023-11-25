@@ -37,7 +37,7 @@
                 <VIcon>mdi-delete</VIcon>
               </VBtn>
               <sub v-text="mySkill.nama"></sub>
-              <VImg :src="`${config.apiTarget}/${mySkill.gambar}`"
+              <VImg :src="`${config.apiTarget}/${imagePath}/${mySkill.gambar}`"
                 :style="{ display: mySkill.isHovered ? 'none' : 'block' }" />
             </VCardItem>
           </VCard>
@@ -53,7 +53,7 @@
                 <VIcon>mdi-delete</VIcon>
               </VBtn>
               <sub v-text="myTool.nama"></sub>
-              <VImg :src="`${config.apiTarget}/${myTool.gambar}`"
+              <VImg :src="`${config.apiTarget}/${imagePath}/${myTool.gambar}`"
                 :style="{ display: myTool.isHovered ? 'none' : 'block' }" />
             </VCardItem>
           </VCard>
