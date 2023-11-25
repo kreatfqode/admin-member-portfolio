@@ -30,7 +30,7 @@
     </VCol>
     <VCol cols="12" md="6">
       <VRow>
-        <VCol cols="12" md="2" v-for="(mySkill, index) in mySkills" :key="mySkill.id">
+        <VCol cols="4" md="2" v-for="(mySkill, index) in mySkills" :key="mySkill.id">
           <VCard @mouseenter="setHovered(index, true)" @mouseleave="setHovered(index, false)">
             <VCardItem>
               <VBtn v-if="mySkill.isHovered" icon @click="deleteSkill(mySkill.id)" class="delete-button" color="error">
@@ -46,7 +46,7 @@
     </VCol>
     <VCol cols="12" md="6">
       <VRow>
-        <VCol cols="12" md="2" v-for="(myTool, index) in myTools">
+        <VCol cols="4" md="2" v-for="(myTool, index) in myTools">
           <VCard @mouseenter="setHovered(index, true, true)" @mouseleave="setHovered(index, false, true)">
             <VCardItem>
               <VBtn v-if="myTool.isHovered" icon @click="deleteTool(myTool.id)" class="delete-button" color="error">
