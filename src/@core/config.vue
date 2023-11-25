@@ -1,6 +1,6 @@
 <script>
 export default {
-    apiTarget: "https://api-kreatifqode.000webhostapp.com",
+    apiTarget: "https://www.kreatifqode.my.id",
     deploymenBase: "",
     imagePath: ""
 }
