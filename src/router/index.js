@@ -3,12 +3,12 @@ import axios from "axios";
 import { createRouter, createWebHistory } from "vue-router";
 
 const isAuthenticated = async () => {
-  const url = `${config.apiTarget}/api/auth/me`;
-  const token = localStorage.getItem("jwt-token");
+  const url = `${config.apiTarget}/api/auth`;
+  const token = 'Bearer ' + localStorage.getItem("authToken");
 
   if (token) {
     const headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: token,
     };
 
     try {
@@ -16,13 +16,13 @@ const isAuthenticated = async () => {
       const berhasil = response.status === 200;
       return berhasil;
     } catch (error) {
-      localStorage.removeItem("jwt-token");
+      localStorage.removeItem("authToken");
       console.error(error);
       return false;
     }
   } else {
-    localStorage.removeItem("jwt-token");
-    console.error("Token JWT tidak tersedia");
+    localStorage.removeItem("authToken");
+    console.error("Auth Token tidak tersedia");
     return false;
   }
 };

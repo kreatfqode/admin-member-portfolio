@@ -1,8 +1,8 @@
 <script>
 export default {
-    apiTarget: "http://localhost:8000",
-    deploymenBase: "admin/",
-    imagePath: "public/images/upload"
+    apiTarget: "https://api-kreatifqode.000webhostapp.com",
+    deploymenBase: "",
+    imagePath: ""
 }
 // http://localhost:8000
 // http://cubepro.000webhostapp.com

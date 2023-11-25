@@ -2,7 +2,6 @@
 import config from "@/@core/config.vue";
 import VerticalNavLayout from "@layouts/components/VerticalNavLayout.vue";
 import VerticalNavLink from "@layouts/components/VerticalNavLink.vue";
-import axios from "axios";
 import Swal from 'sweetalert2';
 import { useTheme } from "vuetify";
 
@@ -26,37 +25,26 @@ const clickLogout = async () => {
       denyButtonText: `Log Out`,
     });
     if (confirmLogout.isDenied) {
-      const token = localStorage.getItem("jwt-token");
-
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      const response = await axios.post(`${config.apiTarget}/api/auth/logout`, {}, { headers }); // Ganti dengan URL logout yang sesuai
-
-      if (response.status === 200) {
-        // Logout berhasil
-        localStorage.removeItem("jwt-token");
-        localStorage.removeItem("id_programmers");
-        localStorage.removeItem("email");
-        localStorage.removeItem("nama_panggilan");
-        localStorage.removeItem("nama_lengkap");
-        localStorage.removeItem("foto_utama");
-        localStorage.removeItem("foto_tentang");
-        localStorage.removeItem("tentang_diri");
-        localStorage.removeItem("tentang_skill");
-        localStorage.removeItem("tentang_pengalaman");
-        localStorage.removeItem("tentang_project");
-        localStorage.removeItem("alamat");
-        localStorage.removeItem("no_telp");
-        localStorage.removeItem("mulai_karir");
-        localStorage.removeItem("moto_project");
-        localStorage.removeItem("pdf_cv");
-        // Redirect ke halaman login atau halaman lain yang sesuai
-        window.location.href = `/${config.deploymenBase}login`;
-      } else {
-        // Tangani kesalahan logout jika diperlukan
-        alert("Logout gagal");
-      }
+      const token = 'Bearer ' + localStorage.getItem("authToken");
+      // Logout berhasil
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("id_programmers");
+      localStorage.removeItem("email");
+      localStorage.removeItem("nama_panggilan");
+      localStorage.removeItem("nama_lengkap");
+      localStorage.removeItem("foto_utama");
+      localStorage.removeItem("foto_tentang");
+      localStorage.removeItem("tentang_diri");
+      localStorage.removeItem("tentang_skill");
+      localStorage.removeItem("tentang_pengalaman");
+      localStorage.removeItem("tentang_project");
+      localStorage.removeItem("alamat");
+      localStorage.removeItem("no_telp");
+      localStorage.removeItem("mulai_karir");
+      localStorage.removeItem("moto_project");
+      localStorage.removeItem("pdf_cv");
+      // Redirect ke halaman login atau halaman lain yang sesuai
+      window.location.href = `${config.deploymenBase}/login`;
     }
   } catch (error) {
     // Tangani kesalahan yang mungkin terjadi selama permintaan logout

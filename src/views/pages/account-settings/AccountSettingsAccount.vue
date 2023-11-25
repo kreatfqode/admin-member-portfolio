@@ -223,9 +223,13 @@ export default {
               let formData = {
                 id_programmers: localStorage.getItem('id_programmers')
               };
+
               formData[imgProp] = fileReader.result;
+
+              const token = 'Bearer ' + localStorage.getItem("authToken");
               const response = await axios.put(`${config.apiTarget}/api/programmers`, formData, {
                 headers: {
+                  'Authorization': token,
                   'Content-Type': 'application/json'
                 }
               });
@@ -294,9 +298,11 @@ export default {
         formData.append('moto_project', accountDataLocal.value.moto_project);
         formData.append('pdf_cv', accountDataLocal.value.pdf_cv);
 
+        const token = 'Bearer ' + localStorage.getItem("authToken");
         const response = await axios.put(`${config.apiTarget}/api/programmers`, formData, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': token,
           }
         });
         if (response.status == 201) {

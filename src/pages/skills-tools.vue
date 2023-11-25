@@ -30,7 +30,7 @@
     </VCol>
     <VCol cols="12" md="6">
       <VRow>
-        <VCol cols="12" md="2" v-for="(mySkill, index) in mySkills" :key="mySkill.id">
+        <VCol cols="4" md="2" v-for="(mySkill, index) in mySkills" :key="mySkill.id">
           <VCard @mouseenter="setHovered(index, true)" @mouseleave="setHovered(index, false)">
             <VCardItem>
               <VBtn v-if="mySkill.isHovered" icon @click="deleteSkill(mySkill.id)" class="delete-button" color="error">
@@ -46,7 +46,7 @@
     </VCol>
     <VCol cols="12" md="6">
       <VRow>
-        <VCol cols="12" md="2" v-for="(myTool, index) in myTools">
+        <VCol cols="4" md="2" v-for="(myTool, index) in myTools">
           <VCard @mouseenter="setHovered(index, true, true)" @mouseleave="setHovered(index, false, true)">
             <VCardItem>
               <VBtn v-if="myTool.isHovered" icon @click="deleteTool(myTool.id)" class="delete-button" color="error">
@@ -82,11 +82,22 @@ export default {
 
     const addSkill = async () => {
       try {
+        const token = 'Bearer ' + localStorage.getItem("authToken");
+
+        const headers = {
+          Authorization: token,
+        };
+
         isLoadingSkill.value = true;
-        const response = await axios.post(`${config.apiTarget}/api/skills`, {
-          id_programmers: localStorage.getItem('id_programmers'),
-          id_skills: skillSelected.value
-        });
+        const response = await axios.post(
+          `${config.apiTarget}/api/skills`,
+          {
+            id_programmers: localStorage.getItem('id_programmers'),
+            id_skills: skillSelected.value
+          },
+          {
+            headers
+          });
         await fetchData();
         isLoadingSkill.value = false;
         Swal.fire({
@@ -120,11 +131,21 @@ export default {
 
     const addTool = async () => {
       try {
+        const token = 'Bearer ' + localStorage.getItem("authToken");
+
+        const headers = {
+          Authorization: token,
+        };
         isLoadingTool.value = true;
-        const response = await axios.post(`${config.apiTarget}/api/tools`, {
-          id_programmers: localStorage.getItem('id_programmers'),
-          id_tools: toolSelected.value
-        });
+        const response = await axios.post(
+          `${config.apiTarget}/api/tools`,
+          {
+            id_programmers: localStorage.getItem('id_programmers'),
+            id_tools: toolSelected.value
+          },
+          {
+            headers
+          });
         await await fetchData();
         isLoadingTool.value = false;
         Swal.fire({
