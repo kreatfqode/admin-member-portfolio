@@ -77,31 +77,33 @@ export default {
     const error = ref(null);
 
     const login = async (formLogin) => {
+
       try {
         isLoading.value = true;
         formLogin.preventDefault();
+
         const loginData = {
           email: form.value.email,
           password: form.value.password,
         };
+
         const response = await axios
-          .post(`${config.apiTarget}/api/auth/login`, loginData, {
-            withCredentials: true,
-            mode: 'cors'
-          });
+          .post(`${config.apiTarget}/api/login`, loginData);
         if (response.status === 200) {
-          localStorage.setItem("jwt-token", response.data.access_token);
-          const url = `${config.apiTarget}/api/auth/me`;
-          const token = response.data.access_token;
-          const headers = {
-            Authorization: `Bearer ${token}`,
-          };
+          console.log(response);
+          localStorage.setItem("authToken", response.data.token);
+          localStorage.setItem("id_programmers", response.data.id_programmers);
+
+          const url = `${config.apiTarget}/api/auth`;
 
           try {
-            const responseAuth = await axios.post(url, {}, { headers });
+            const responseAuth = await axios.post(url, {
+            }, {
+              headers: { Authorization: 'Bearer ' + response.data.token }
+            });
+            console.log(responseAuth);
             const berhasil = responseAuth.status === 200;
             if (berhasil) {
-              localStorage.setItem("id_programmers", responseAuth.data.id);
               localStorage.setItem("web_portfolio", `${responseAuth.data.web_portfolio}?id_programmers=${responseAuth.data.id}`);
               localStorage.setItem("email", responseAuth.data.email);
               localStorage.setItem("warna_primary", responseAuth.data.warna_primary);
@@ -132,7 +134,7 @@ export default {
               );
               localStorage.setItem(
                 "tentang_pengalaman",
-                responseAuth.data.tentang_pengalaman ? data.tentang_pengalaman : ""
+                responseAuth.data.tentang_pengalaman ? responseAuth.data.tentang_pengalaman : ""
               );
               localStorage.setItem(
                 "tentang_project",
@@ -158,11 +160,11 @@ export default {
                 "pdf_cv",
                 responseAuth.data.pdf_cv ? responseAuth.data.pdf_cv : ""
               );
-              window.location.href = `/${config.deploymenBase}dashboard`;
+              window.location.href = `${config.deploymenBase}/dashboard`;
             }
             return berhasil;
           } catch (error) {
-            localStorage.removeItem("jwt-token");
+            localStorage.removeItem("authToken");
             console.error(error);
             return false;
           }

@@ -223,9 +223,13 @@ export default {
               let formData = {
                 id_programmers: localStorage.getItem('id_programmers')
               };
+
               formData[imgProp] = fileReader.result;
+
+              const token = localStorage.getItem("authToken");
               const response = await axios.put(`${config.apiTarget}/api/programmers`, formData, {
                 headers: {
+                  'Authorization': token,
                   'Content-Type': 'application/json'
                 }
               });

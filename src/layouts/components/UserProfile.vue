@@ -13,16 +13,16 @@ const clickLogout = async () => {
       denyButtonText: `Log Out`,
     });
     if (confirmLogout.isDenied) {
-      const token = localStorage.getItem("jwt-token");
+      const token = localStorage.getItem("authToken");
 
       const headers = {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       };
-      const response = await axios.post(`${config.apiTarget}/api/auth/logout`, {}, { headers }); // Ganti dengan URL logout yang sesuai
+      const response = await axios.post(`${config.apiTarget}/api/logout`, {}, { headers }); // Ganti dengan URL logout yang sesuai
 
       if (response.status === 200) {
         // Logout berhasil
-        localStorage.removeItem("jwt-token");
+        localStorage.removeItem("authToken");
         localStorage.removeItem("id_programmers");
         localStorage.removeItem("email");
         localStorage.removeItem("nama_panggilan");
@@ -39,7 +39,7 @@ const clickLogout = async () => {
         localStorage.removeItem("moto_project");
         localStorage.removeItem("pdf_cv");
         // Redirect ke halaman login atau halaman lain yang sesuai
-        window.location.href = `/${config.deploymenBase}login`;
+        window.location.href = `${config.deploymenBase}/login`;
       } else {
         // Tangani kesalahan logout jika diperlukan
         alert("Logout gagal");

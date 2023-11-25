@@ -129,6 +129,7 @@ export default {
             {
               headers: {
                 'Content-Type': 'multipart/form-data',
+                'Authorization': localStorage.getItem("authToken")
               },
             }
           );
