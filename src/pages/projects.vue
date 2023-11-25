@@ -1,7 +1,7 @@
 <script setup>
-import { useRoute } from "vue-router";
-import ReadProjects from "@/views/pages/projects/ReadProjects.vue";
 import CreateProjects from "@/views/pages/projects/CreateProjects.vue";
+import ReadProjects from "@/views/pages/projects/ReadProjects.vue";
+import { useRoute } from "vue-router";
 // import AccountSettingsSecurity from "@/views/pages/";
 
 const route = useRoute();

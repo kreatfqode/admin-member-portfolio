@@ -107,27 +107,31 @@
               </VCol>
 
               <VCol md="12" cols="12">
-                <VTextField v-model="accountDataLocal.tentang_diri" placeholder="Cerita singkat tetang anda.."
+                <VTextField v-model="accountDataLocal.url_portfolio" placeholder="url_portfolio" label="url_portfolio" />
+              </VCol>
+
+              <VCol md="12" cols="12">
+                <VTextarea v-model="accountDataLocal.tentang_diri" placeholder="Cerita singkat tetang anda.."
                   label="Tentang Diri" />
               </VCol>
 
               <VCol md="12" cols="12">
-                <VTextField v-model="accountDataLocal.tentang_skill" placeholder="Cerita singkat keseluruhan skill.."
+                <VTextarea v-model="accountDataLocal.tentang_skill" placeholder="Cerita singkat keseluruhan skill.."
                   label="Tentang Skill" />
               </VCol>
 
               <VCol md="12" cols="12">
-                <VTextField v-model="accountDataLocal.tentang_pengalaman"
+                <VTextarea v-model="accountDataLocal.tentang_pengalaman"
                   placeholder="Cerita singkat keseluruhan pengalaman.." label="Tentang Pengalaman" />
               </VCol>
 
               <VCol md="12" cols="12">
-                <VTextField v-model="accountDataLocal.tentang_project" placeholder="Cerita singkat keseluruhan project.."
+                <VTextarea v-model="accountDataLocal.tentang_project" placeholder="Cerita singkat keseluruhan project.."
                   label="Tentang Project" />
               </VCol>
 
               <VCol md="12" cols="12">
-                <VTextField v-model="accountDataLocal.alamat" placeholder="alamat" label="Alamat" />
+                <VTextarea v-model="accountDataLocal.alamat" placeholder="alamat" label="Alamat" />
               </VCol>
 
               <VCol md="6" cols="12">
@@ -199,6 +203,7 @@ export default {
       mulai_karir: localStorage.getItem("mulai_karir"),
       moto_project: localStorage.getItem("moto_project"),
       pdf_cv: localStorage.getItem("pdf_cv"),
+      url_portfolio: localStorage.getItem("url_portfolio"),
     };
 
     const isLoading = ref(false);

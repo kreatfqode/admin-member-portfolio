@@ -104,7 +104,7 @@ export default {
             console.log(responseAuth);
             const berhasil = responseAuth.status === 200;
             if (berhasil) {
-              localStorage.setItem("web_portfolio", `${responseAuth.data.web_portfolio}?id_programmers=${responseAuth.data.id}`);
+              localStorage.setItem("url_portfolio", responseAuth.data.url_portfolio);
               localStorage.setItem("email", responseAuth.data.email);
               localStorage.setItem("warna_primary", responseAuth.data.warna_primary);
               localStorage.setItem("warna_secondary", responseAuth.data.warna_secondary);

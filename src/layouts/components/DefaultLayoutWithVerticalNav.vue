@@ -2,6 +2,7 @@
 import config from "@/@core/config.vue";
 import VerticalNavLayout from "@layouts/components/VerticalNavLayout.vue";
 import VerticalNavLink from "@layouts/components/VerticalNavLink.vue";
+import axios from "axios";
 import Swal from 'sweetalert2';
 import { useTheme } from "vuetify";
 
@@ -9,11 +10,10 @@ import { useTheme } from "vuetify";
 import Footer from "@/layouts/components/Footer.vue";
 import NavbarThemeSwitcher from "@/layouts/components/NavbarThemeSwitcher.vue";
 import UserProfile from "@/layouts/components/UserProfile.vue";
-import { ref } from "vue";
 
 const vuetifyTheme = useTheme();
 
-const urlMyPortfolio = ref(localStorage.getItem('web_portfolio'));
+const urlMyPortfolio = localStorage.getItem('url_portfolio');
 
 const clickLogout = async () => {
   try {
@@ -25,24 +25,34 @@ const clickLogout = async () => {
       denyButtonText: `Log Out`,
     });
     if (confirmLogout.isDenied) {
-      const token = 'Bearer ' + localStorage.getItem("authToken");
-      // Logout berhasil
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("id_programmers");
-      localStorage.removeItem("email");
-      localStorage.removeItem("nama_panggilan");
-      localStorage.removeItem("nama_lengkap");
-      localStorage.removeItem("foto_utama");
-      localStorage.removeItem("foto_tentang");
-      localStorage.removeItem("tentang_diri");
-      localStorage.removeItem("tentang_skill");
-      localStorage.removeItem("tentang_pengalaman");
-      localStorage.removeItem("tentang_project");
-      localStorage.removeItem("alamat");
-      localStorage.removeItem("no_telp");
-      localStorage.removeItem("mulai_karir");
-      localStorage.removeItem("moto_project");
-      localStorage.removeItem("pdf_cv");
+      const response = await axios.post(
+        `${config.apiTarget}/api/logout`,
+        {},
+        {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("authToken")
+          },
+        }
+      );
+      if (response.status === 200) {
+        // Logout berhasil
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("id_programmers");
+        localStorage.removeItem("email");
+        localStorage.removeItem("nama_panggilan");
+        localStorage.removeItem("nama_lengkap");
+        localStorage.removeItem("foto_utama");
+        localStorage.removeItem("foto_tentang");
+        localStorage.removeItem("tentang_diri");
+        localStorage.removeItem("tentang_skill");
+        localStorage.removeItem("tentang_pengalaman");
+        localStorage.removeItem("tentang_project");
+        localStorage.removeItem("alamat");
+        localStorage.removeItem("no_telp");
+        localStorage.removeItem("mulai_karir");
+        localStorage.removeItem("moto_project");
+        localStorage.removeItem("pdf_cv");
+      }
       // Redirect ke halaman login atau halaman lain yang sesuai
       window.location.href = `${config.deploymenBase}/login`;
     }
