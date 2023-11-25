@@ -79,6 +79,7 @@ export default {
     const toolOptions = ref([]);
     const mySkills = ref([]);
     const myTools = ref([]);
+    const imagePath = config.imagePath;
 
     const addSkill = async () => {
       try {
@@ -295,6 +296,7 @@ export default {
       myTools,
       isLoadingSkill,
       isLoadingTool,
+      imagePath,
       addSkill,
       addTool,
       deleteSkill,
