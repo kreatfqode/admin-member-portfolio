@@ -25,7 +25,7 @@ const clickLogout = async () => {
       denyButtonText: `Log Out`,
     });
     if (confirmLogout.isDenied) {
-      const token = localStorage.getItem("authToken");
+      const token = 'Bearer ' + localStorage.getItem("authToken");
       // Logout berhasil
       localStorage.removeItem("authToken");
       localStorage.removeItem("id_programmers");

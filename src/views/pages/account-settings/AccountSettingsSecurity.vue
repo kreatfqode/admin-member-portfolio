@@ -93,9 +93,11 @@ export default {
             password: newPassword.value
           }
 
+          const token = 'Bearer ' + localStorage.getItem("authToken");
           const response = await axios.put(`${config.apiTarget}/api/programmers`, formData, {
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': token,
             }
           });
 

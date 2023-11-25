@@ -13,7 +13,7 @@ const clickLogout = async () => {
       denyButtonText: `Log Out`,
     });
     if (confirmLogout.isDenied) {
-      const token = localStorage.getItem("authToken");
+      const token = 'Bearer ' + localStorage.getItem("authToken");
 
       const headers = {
         Authorization: token,

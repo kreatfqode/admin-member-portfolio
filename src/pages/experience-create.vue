@@ -51,6 +51,12 @@ export default {
 
         const submitForm = async (formLogin) => {
             try {
+                const token = 'Bearer ' + localStorage.getItem("authToken");
+
+                const headers = {
+                    Authorization: token,
+                };
+
                 isLoading.value = true;
                 formLogin.preventDefault();
                 const formData = new FormData();
@@ -62,7 +68,10 @@ export default {
 
                 const response = await axios.post(
                     `${config.apiTarget}/api/experiences`,
-                    formData
+                    formData,
+                    {
+                        headers
+                    }
                 );
 
                 isLoading.value = false;
